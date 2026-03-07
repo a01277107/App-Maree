@@ -1,0 +1,39 @@
+<%- include('partials/page-start', { title, path }) %>
+
+<h1 class="text-2xl md:text-3xl font-semibold tracking-tight">Pedido <%= order.id %></h1>
+<p class="text-neutral-600 text-sm mt-1">Estado: <span class="font-medium"><%= order.status %></span></p>
+
+<div class="mt-6 grid lg:grid-cols-3 gap-6">
+  <section class="lg:col-span-2 rounded-3xl border border-neutral-200 bg-white p-6 glass">
+    <h2 class="font-semibold">Detalle</h2>
+
+    <div class="mt-4 space-y-3">
+      <% (order.items || []).forEach((item) => { %>
+        <div class="flex items-start justify-between gap-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
+          <div>
+            <p class="font-medium"><%= item.name %></p>
+            <p class="text-xs text-neutral-600">x<%= item.qty %></p>
+            <% if (item.note) { %>
+              <p class="text-xs text-neutral-500 mt-1">Nota: <%= item.note %></p>
+            <% } %>
+          </div>
+          <p class="font-semibold"><%= formatMoney(item.total) %></p>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+
+  <aside class="rounded-3xl border border-neutral-200 bg-white p-6 h-fit glass">
+    <h2 class="font-semibold">Total</h2>
+    <p class="mt-2 text-3xl font-semibold"><%= formatMoney(order.total) %></p>
+
+    <div class="mt-5 rounded-2xl border border-neutral-200 bg-neutral-50 p-4 text-sm text-neutral-700">
+      <p class="font-semibold">Siguiente paso (demo)</p>
+      <p class="text-neutral-600 mt-1">En el sistema real, aquí verías el tracking: preparando → listo → entregado.</p>
+    </div>
+
+    <a href="/" class="mt-4 block text-center rounded-2xl border border-neutral-300 bg-white px-5 py-3 text-sm hover:bg-neutral-50 transition glass">Volver al inicio</a>
+  </aside>
+</div>
+
+<%- include('partials/page-end') %>

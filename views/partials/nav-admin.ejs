@@ -1,0 +1,30 @@
+<% const isActive = (p) => (path === p ? 'text-neutral-900' : 'text-neutral-600 hover:text-neutral-900'); %>
+<header class="sticky top-0 z-40 bg-white/70 backdrop-blur border-b border-white/40 lovable-nav">
+  <div class="lovable-container px-4 py-3 flex items-center justify-between">
+    <a href="/admin" class="font-semibold tracking-tight text-neutral-900">Mareé Admin</a>
+
+    <nav class="hidden md:flex items-center gap-5 text-sm">
+      <a class="<%= isActive('/admin') %>" href="/admin">Dashboard</a>
+      <a class="<%= isActive('/admin/pedidos') %>" href="/admin/pedidos">Pedidos</a>
+      <a class="<%= isActive('/admin/menu') %>" href="/admin/menu">Menú</a>
+      <a class="<%= isActive('/admin/promociones') %>" href="/admin/promociones">Promociones</a>
+      <a class="<%= isActive('/admin/reportes') %>" href="/admin/reportes">Reportes</a>
+      <a class="text-neutral-600 hover:text-neutral-900" href="/">Vista cliente</a>
+    </nav>
+
+    <button class="md:hidden rounded-xl border border-white/50 bg-white/60 px-3 py-2 text-sm hover:bg-white/80" data-mobile-menu>
+      Menú
+    </button>
+  </div>
+
+  <div class="md:hidden hidden border-t border-white/40 bg-white/70" data-mobile-panel>
+    <div class="lovable-container px-4 py-3 flex flex-col gap-3 text-sm">
+      <a class="<%= isActive('/admin') %>" href="/admin">Dashboard</a>
+      <a class="<%= isActive('/admin/pedidos') %>" href="/admin/pedidos">Pedidos</a>
+      <a class="<%= isActive('/admin/menu') %>" href="/admin/menu">Menú</a>
+      <a class="<%= isActive('/admin/promociones') %>" href="/admin/promociones">Promociones</a>
+      <a class="<%= isActive('/admin/reportes') %>" href="/admin/reportes">Reportes</a>
+      <a class="text-neutral-600 hover:text-neutral-900" href="/">Vista cliente</a>
+    </div>
+  </div>
+</header>

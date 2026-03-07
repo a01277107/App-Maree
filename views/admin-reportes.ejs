@@ -1,0 +1,53 @@
+<%- include('partials/page-start-admin', { title, path }) %>
+
+<section class="space-y-6">
+  <div class="glass p-6 flex items-start justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-semibold tracking-tight">Reportes</h1>
+      <p class="text-neutral-700 mt-2">Métricas solicitadas: clientes por día/mes por género, producto más vendido, ingredientes más populares, valoración.</p>
+    </div>
+    <a class="lovable-btn inline-flex items-center rounded-xl bg-white/70 px-4 py-2 text-sm border border-white/50 hover:bg-white" href="/admin">Volver</a>
+  </div>
+
+  <div class="grid lg:grid-cols-2 gap-4">
+    <div class="glass p-6">
+      <h2 class="font-semibold">Clientes (mes) por género</h2>
+      <div class="mt-4 space-y-2 text-sm text-neutral-700">
+        <div class="flex items-center justify-between"><span>Mujer</span><span class="font-medium"><%= report.clientesGenero.mujer %></span></div>
+        <div class="flex items-center justify-between"><span>Hombre</span><span class="font-medium"><%= report.clientesGenero.hombre %></span></div>
+        <div class="flex items-center justify-between"><span>Otro/Prefiero no decir</span><span class="font-medium"><%= report.clientesGenero.otro %></span></div>
+      </div>
+    </div>
+
+    <div class="glass p-6">
+      <h2 class="font-semibold">Producto / bebida más vendido</h2>
+      <div class="mt-4">
+        <div class="text-2xl font-semibold"><%= report.topProducto.nombre %></div>
+        <div class="text-sm text-neutral-600 mt-1">Unidades (mock): <%= report.topProducto.unidades %></div>
+      </div>
+    </div>
+
+    <div class="glass p-6">
+      <h2 class="font-semibold">Ingredientes más populares</h2>
+      <ul class="mt-4 space-y-2 text-sm text-neutral-700">
+        <% report.topIngredientes.forEach(x => { %>
+          <li class="flex items-center justify-between">
+            <span><%= x.nombre %></span>
+            <span class="font-medium"><%= x.usos %></span>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <div class="glass p-6">
+      <h2 class="font-semibold">Valoración recibida</h2>
+      <div class="mt-4">
+        <div class="text-4xl font-semibold"><%= report.valoracion.promedio %><span class="text-base font-normal text-neutral-600">/5</span></div>
+        <div class="text-sm text-neutral-600 mt-2">Reseñas (mock): <%= report.valoracion.total %></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<%- include('partials/page-end-admin') %>

@@ -1,0 +1,16 @@
+{
+  "name": "maree-express-prototype",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Prototipo navegable de cliente (Express + EJS) para Maree Crepe, sin React",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.1"
+  }
+}

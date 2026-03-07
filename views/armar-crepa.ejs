@@ -1,0 +1,157 @@
+<%- include('partials/page-start', { title, path }) %>
+
+<div class="flex items-end justify-between gap-4 flex-wrap">
+  <div>
+    <h1 class="text-2xl md:text-3xl font-semibold tracking-tight">Arma tu crepa</h1>
+    <p class="text-neutral-600 text-sm mt-1">Configura ingredientes, extras y guarda como “Mi crepa”.</p>
+  </div>
+</div>
+
+<div class="mt-6 grid lg:grid-cols-3 gap-6">
+  <section class="lg:col-span-2 rounded-3xl border border-neutral-200 bg-white p-6 glass">
+    <h2 class="font-semibold">Configuración</h2>
+
+    <div class="mt-4 grid md:grid-cols-2 gap-4">
+      <div>
+        <label class="text-sm font-medium">Base</label>
+        <select class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" id="baseType">
+          <% builder.baseOptions.forEach((b) => { %>
+            <option value="<%= b.id %>"><%= b.name %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div>
+        <label class="text-sm font-medium">Paquete de ingredientes</label>
+        <select class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" id="pack">
+          <% builder.ingredientPacks.forEach((p) => { %>
+            <option value="<%= p.id %>" data-included="<%= p.included %>" data-baseprice="<%= p.basePrice %>">
+              <%= p.name %> — $<%= p.basePrice %>
+            </option>
+          <% }) %>
+        </select>
+        <p class="text-xs text-neutral-500 mt-1">Extra ingrediente: $<%= builder.extras.ingredienteExtra %></p>
+      </div>
+    </div>
+
+    <div class="mt-6 grid md:grid-cols-3 gap-4">
+      <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
+        <p class="text-sm font-semibold">Fruta</p>
+        <div class="mt-3 space-y-2">
+          <% builder.ingredients.fruta.forEach((name) => { %>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" class="ingredient" data-group="fruta" value="<%= name %>" />
+              <span><%= name %></span>
+            </label>
+          <% }) %>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
+        <p class="text-sm font-semibold">Untables</p>
+        <div class="mt-3 space-y-2">
+          <% builder.ingredients.untables.forEach((name) => { %>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" class="ingredient" data-group="untables" value="<%= name %>" />
+              <span><%= name %></span>
+            </label>
+          <% }) %>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
+        <p class="text-sm font-semibold">Toppings</p>
+        <div class="mt-3 space-y-2">
+          <% builder.ingredients.toppings.forEach((name) => { %>
+            <label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" class="ingredient" data-group="toppings" value="<%= name %>" />
+              <span><%= name %></span>
+            </label>
+          <% }) %>
+        </div>
+        <p class="text-xs text-neutral-500 mt-2">Sin límite (pero se cobra extra si excede el paquete).</p>
+      </div>
+    </div>
+
+    <div class="mt-6 grid md:grid-cols-3 gap-4">
+      <label class="rounded-2xl border border-neutral-200 bg-white p-4 flex items-start gap-3 cursor-pointer hover:bg-neutral-50 transition glass">
+        <input type="checkbox" id="addIceCream" />
+        <div>
+          <p class="text-sm font-semibold">Agregar nieve</p>
+          <p class="text-xs text-neutral-600">+$<%= builder.extras.agregarNieve %></p>
+        </div>
+      </label>
+
+      <label class="rounded-2xl border border-neutral-200 bg-white p-4 flex items-start gap-3 cursor-pointer hover:bg-neutral-50 transition glass">
+        <input type="checkbox" id="salty" />
+        <div>
+          <p class="text-sm font-semibold">Es salada</p>
+          <p class="text-xs text-neutral-600">Habilita opción de huevo</p>
+        </div>
+      </label>
+
+      <label class="rounded-2xl border border-neutral-200 bg-white p-4 flex items-start gap-3 cursor-pointer hover:bg-neutral-50 transition glass">
+        <input type="checkbox" id="addEgg" disabled />
+        <div>
+          <p class="text-sm font-semibold">Agregar huevo</p>
+          <p class="text-xs text-neutral-600">+$<%= builder.extras.huevoSalada %> (solo saladas)</p>
+        </div>
+      </label>
+    </div>
+
+    <div class="mt-6">
+      <label class="text-sm font-medium">Comentario especial</label>
+      <input id="note" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="Ej. sin azúcar glass / poco nutella" />
+    </div>
+
+    <div class="mt-6 rounded-2xl border border-neutral-200 bg-neutral-50 p-4 text-sm text-neutral-700">
+      <p class="font-semibold">Reglas (demo)</p>
+      <ul class="mt-2 list-disc pl-5 space-y-1 text-neutral-600">
+        <li><%= builder.reglas.nutellaAuto %></li>
+        <li><%= builder.reglas.huevoSoloSaladas %></li>
+        <li><%= builder.reglas.infusionesNoMod %></li>
+      </ul>
+    </div>
+  </section>
+
+  <aside class="rounded-3xl border border-neutral-200 bg-white p-6 lg:sticky lg:top-24 h-fit glass">
+    <h2 class="font-semibold">Resumen</h2>
+
+    <div class="mt-4 space-y-2 text-sm">
+      <div class="flex items-center justify-between"><span>Incluidos</span><span id="includedCount">0</span></div>
+      <div class="flex items-center justify-between"><span>Seleccionados</span><span id="selectedCount">0</span></div>
+      <div class="flex items-center justify-between"><span>Extras cobrados</span><span id="extraCount">0</span></div>
+    </div>
+
+    <div class="mt-4 rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
+      <p class="text-xs text-neutral-500">Total</p>
+      <p class="text-2xl font-semibold" id="total">$0.00</p>
+      <p class="text-xs text-neutral-600 mt-1" id="summaryLine">—</p>
+    </div>
+
+    <div class="mt-4 space-y-3">
+      <form method="POST" action="/armar-crepa/agregar-carrito" onsubmit="return window.MareeBuilder.submitTo(this)">
+        <input type="hidden" name="payload" value="" />
+        <button type="submit" class="w-full rounded-2xl bg-neutral-900 text-white px-5 py-3 text-sm hover:opacity-90 transition">Agregar al carrito</button>
+      </form>
+
+      <div class="rounded-2xl border border-neutral-200 bg-white p-4 glass">
+        <label class="text-sm font-medium">Nombre para guardar</label>
+        <input id="savedName" class="mt-1 w-full rounded-xl border border-neutral-300 px-3 py-2" placeholder="Ej. La de siempre" />
+        <form class="mt-3" method="POST" action="/armar-crepa/guardar" onsubmit="return window.MareeBuilder.submitTo(this)">
+          <input type="hidden" name="payload" value="" />
+          <button type="submit" class="w-full rounded-2xl border border-neutral-300 bg-white px-5 py-3 text-sm hover:bg-neutral-50 transition glass">Guardar como “Mi crepa”</button>
+        </form>
+      </div>
+
+      <a href="/carrito" class="block text-center rounded-2xl border border-neutral-300 bg-white px-5 py-3 text-sm hover:bg-neutral-50 transition glass">Ver carrito</a>
+    </div>
+  </aside>
+</div>
+
+<script>
+  window.__BUILDER__ = <%- JSON.stringify(builder) %>;
+</script>
+<script defer src="/js/builder.js"></script>
+
+<%- include('partials/page-end') %>

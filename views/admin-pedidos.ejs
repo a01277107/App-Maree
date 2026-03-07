@@ -1,0 +1,41 @@
+<%- include('partials/page-start-admin', { title, path }) %>
+
+<section class="space-y-6">
+  <div class="glass p-6 flex items-start justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-semibold tracking-tight">Pedidos</h1>
+      <p class="text-neutral-700 mt-2">Lista de pedidos simulados para demo del flujo operativo.</p>
+    </div>
+    <a class="lovable-btn inline-flex items-center rounded-xl bg-white/70 px-4 py-2 text-sm border border-white/50 hover:bg-white" href="/admin">Volver</a>
+  </div>
+
+  <div class="glass p-6 overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="text-left text-neutral-600">
+          <th class="py-2 pr-4">ID</th>
+          <th class="py-2 pr-4">Fecha</th>
+          <th class="py-2 pr-4">Estado</th>
+          <th class="py-2 pr-4">Total</th>
+          <th class="py-2">Cliente</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% pedidos.forEach(p => { %>
+          <tr class="border-t border-white/40">
+            <td class="py-3 pr-4 font-medium"><%= p.id %></td>
+            <td class="py-3 pr-4 text-neutral-700"><%= p.fecha %></td>
+            <td class="py-3 pr-4">
+              <span class="rounded-full border border-white/50 bg-white/70 px-3 py-1 text-xs text-neutral-700"><%= p.estado %></span>
+            </td>
+            <td class="py-3 pr-4 text-neutral-900"><%= formatMoney(p.total) %></td>
+            <td class="py-3 text-neutral-700"><%= p.cliente %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<%- include('partials/page-end-admin') %>

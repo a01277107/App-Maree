@@ -1,0 +1,35 @@
+<% const isActive = (p) => (path === p ? 'text-neutral-900' : 'text-neutral-600 hover:text-neutral-900'); %>
+<header class="sticky top-0 z-40 bg-white/70 backdrop-blur border-b border-white/40 lovable-nav">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="/" class="font-semibold tracking-tight text-neutral-900">Mareé</a>
+
+    <nav class="hidden md:flex items-center gap-5 text-sm">
+      <a class="<%= isActive('/') %>" href="/">Inicio</a>
+      <a class="<%= isActive('/menu') %>" href="/menu">Menú</a>
+      <a class="<%= isActive('/armar-crepa') %>" href="/armar-crepa">Arma tu crepa</a>
+      <a class="<%= isActive('/mi-crepa') %>" href="/mi-crepa">Mis crepas</a>
+      <a class="<%= isActive('/fidelidad') %>" href="/fidelidad">Fidelidad</a>
+      <a class="<%= isActive('/perfil') %>" href="/perfil">Perfil</a>
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="/carrito" class="inline-flex items-center gap-2 rounded-xl border border-neutral-200 px-3 py-2 text-sm hover:bg-neutral-50 transition">
+        <span>Carrito</span>
+      </a>
+      <button class="md:hidden rounded-xl border border-neutral-200 px-3 py-2 text-sm hover:bg-neutral-50" data-mobile-menu>
+        Menú
+      </button>
+    </div>
+  </div>
+
+  <div class="md:hidden hidden border-t border-neutral-200 bg-white" data-mobile-panel>
+    <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-3 text-sm">
+      <a class="<%= isActive('/') %>" href="/">Inicio</a>
+      <a class="<%= isActive('/menu') %>" href="/menu">Menú</a>
+      <a class="<%= isActive('/armar-crepa') %>" href="/armar-crepa">Arma tu crepa</a>
+      <a class="<%= isActive('/mi-crepa') %>" href="/mi-crepa">Mis crepas</a>
+      <a class="<%= isActive('/fidelidad') %>" href="/fidelidad">Fidelidad</a>
+      <a class="<%= isActive('/perfil') %>" href="/perfil">Perfil</a>
+    </div>
+  </div>
+</header>

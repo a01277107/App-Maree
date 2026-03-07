@@ -1,0 +1,51 @@
+<%- include('partials/page-start', { title, path }) %>
+
+<div class="flex items-end justify-between gap-4 flex-wrap">
+  <div>
+    <h1 class="text-2xl md:text-3xl font-semibold tracking-tight">Menú</h1>
+    <p class="text-neutral-600 text-sm mt-1">Organizado por categorías. Puedes abrir grupos y ver productos.</p>
+  </div>
+  <a href="/carrito" class="rounded-2xl border border-neutral-300 bg-white px-4 py-2 text-sm hover:bg-neutral-50 transition glass">Ir al carrito</a>
+</div>
+
+<div class="mt-6 space-y-4">
+  <% categories.forEach((cat) => { %>
+    <section class="rounded-3xl border border-neutral-200 bg-white overflow-hidden glass">
+      <button class="w-full text-left px-5 py-4 flex items-center justify-between gap-4" data-accordion>
+        <div>
+          <h2 class="font-semibold"><%= cat.name %></h2>
+          <p class="text-xs text-neutral-500"><%= cat.groups.length %> grupos</p>
+        </div>
+        <span class="text-neutral-500">▾</span>
+      </button>
+
+      <div class="hidden" data-accordion-panel>
+        <div class="px-5 pb-5 space-y-6">
+          <% cat.groups.forEach((group) => { %>
+            <div>
+              <h3 class="text-sm font-semibold text-neutral-800"><%= group.name %></h3>
+              <div class="mt-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <% group.items.forEach((item) => { %>
+                  <a href="/producto/<%= item.id %>" class="group rounded-2xl border border-neutral-200 bg-neutral-50 p-4 hover:bg-white hover:shadow-sm transition glass">
+                    <div class="flex items-start justify-between gap-3">
+                      <div>
+                        <p class="font-medium"><%= item.name %></p>
+                        <% if (item.desc) { %>
+                          <p class="text-xs text-neutral-600 mt-1 line-clamp-2"><%= item.desc %></p>
+                        <% } %>
+                      </div>
+                      <p class="text-sm font-semibold"><%= formatMoney(item.price) %></p>
+                    </div>
+                    <p class="mt-3 text-xs text-neutral-500 group-hover:text-neutral-700">Ver detalle →</p>
+                  </a>
+                <% }) %>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </section>
+  <% }) %>
+</div>
+
+<%- include('partials/page-end') %>

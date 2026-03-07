@@ -1,0 +1,102 @@
+/* Ajustes mínimos + animaciones (sin React) */
+
+.card-float {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+/* line-clamp helper (porque usamos Tailwind CDN sin plugin) */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Accordion animation */
+[data-accordion-panel] {
+  overflow: hidden;
+}
+
+.fade-in {
+  animation: fadeIn 250ms ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Lovable-like skin (prototipo) ===== */
+:root{
+  --bg: #FFFDF9;
+  --card: rgba(255,255,255,0.72);
+  --cardBorder: rgba(255,255,255,0.55);
+  --text: #0f172a;
+  --muted: rgba(15,23,42,0.65);
+  --shadow: 0 16px 40px rgba(2,6,23,0.12);
+}
+
+html, body { height: 100%; }
+
+body.lovable-bg{
+  margin:0;
+  color: var(--text);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.70), rgba(255,255,255,0.85)),
+    url("C:\Users\santi\Documents\App-Maree\public\images\crepa.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.lovable-shell{
+  min-height: 100vh;
+  padding: 28px 16px;
+}
+
+.lovable-container{
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.lovable-card{
+  background: var(--card);
+  border: 1px solid var(--cardBorder);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.lovable-card:hover{
+  transform: translateY(-2px);
+}
+
+.lovable-btn{
+  border-radius: 14px;
+  transition: transform 200ms ease, box-shadow 200ms ease, background 200ms ease;
+}
+
+.lovable-btn:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(2,6,23,0.14);
+}
+
+.lovable-nav{
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.50);
+  box-shadow: 0 10px 26px rgba(2,6,23,0.10);
+}
+
+/* Util: make tailwind cards look glassy without touching every file */
+.glass{
+  background: var(--card);
+  border: 1px solid var(--cardBorder);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}

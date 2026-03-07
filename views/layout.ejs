@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+  <main class="app-shell">
+  <div class="container">
+    <%- body %>
+  </div>
+</main>
+  <head>
+    <%- include('partials/head', { title }) %>
+  </head>
+  <body class="bg-neutral-50 text-neutral-900">
+    <%- include('partials/nav', { path }) %>
+
+    <main class="max-w-6xl mx-auto px-4 py-8">
+      <%- body %>
+    </main>
+
+    <footer class="border-t border-neutral-200 bg-white">
+      <div class="max-w-6xl mx-auto px-4 py-8 text-sm text-neutral-600">
+        Prototipo navegable (Express + EJS). Datos de ejemplo.
+      </div>
+    </footer>
+  </body>
+</html>
