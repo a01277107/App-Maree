@@ -2,13 +2,34 @@
 <html>
   <%- include('includes/head') %>
   <body>
-    <h1>Regístrate en nuestro sistema de fidelidad</h1>
-    <form method="POST" action="/fidelidad">
-      Nombre: <input type="text" name="nombre" required><br>
-      Correo: <input type="email" name="correo" required><br>
-      Puntos iniciales: <input type="number" name="puntos" value="0"><br>
-      <button type="submit">Enviar</button>
-    </form>
+    <h1>Programa de Fidelidad</h1>
+    <p>Acumula visitas y canjea recompensas exclusivas.</p>
+
+    <div class="rewards-grid">
+      <div class="reward-card">
+        <h2>5 Visitas</h2>
+        <p>Obtén una bebida gratis.</p>
+        <button>Canjear</button>
+      </div>
+
+      <div class="reward-card">
+        <h2>10 Visitas</h2>
+        <p>Una crepa dulce gratis.</p>
+        <button>Canjear</button>
+      </div>
+
+      <div class="reward-card">
+        <h2>15 Visitas</h2>
+        <p>Crepa salada gratis.</p>
+        <button>Canjear</button>
+      </div>
+
+      <div class="reward-card">
+        <h2>20 Visitas</h2>
+        <p>Combo especial (crepa + bebida).</p>
+        <button>Canjear</button>
+      </div>
+    </div>
 
     <%- include('includes/footer') %>
   </body>

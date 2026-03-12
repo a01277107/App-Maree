@@ -5,55 +5,49 @@
     <h1>Menú</h1>
     <h2>Encuentra tu crepe perfecta</h2>
     
+    <!-- Botones de categorías -->
     <div class="filters">
-      <button class="filter active">Arma tu Crepa</button>
-      <button class="filter">Especiales</button>
-      <button class="filter">Artesanales</button>
-      <button class="filter">Saladas</button>
+      <button class="filter active" data-cat="arma">Arma tu Crepa</button>
+      <button class="filter" data-cat="especiales">Especiales</button>
+      <button class="filter" data-cat="artesanales">Artesanales</button>
+      <button class="filter" data-cat="saladas">Saladas</button>
     </div>
+
+    <!-- Tarjetas de productos -->
     <div class="menu-grid">
-      <h2>Arma tu Crepa</h2>
-      <% productos.filter(p => p.categoria === "arma").forEach(p => { %>
-        <div class="card">
+      <% productos.forEach(p => { %>
+        <div class="card" data-cat="<%= p.categoria %>">
           <img src="<%= p.imagen %>" alt="<%= p.nombre %>">
           <h3><%= p.nombre %></h3>
           <p><%= p.descripcion %></p>
           <strong>$<%= p.precio %></strong>
         </div>
-        <% }) %>
-
-  <h2>Especiales</h2>
-  <% productos.filter(p => p.categoria === "especiales").forEach(p => { %>
-    <div class="card">
-      <img src="<%= p.imagen %>" alt="<%= p.nombre %>">
-      <h3><%= p.nombre %></h3>
-      <p><%= p.descripcion %></p>
-      <strong>$<%= p.precio %></strong>
+      <% }) %>
     </div>
-  <% }) %>
-
-  <h2>Artesanales</h2>
-  <% productos.filter(p => p.categoria === "artesanales").forEach(p => { %>
-    <div class="card">
-      <img src="<%= p.imagen %>" alt="<%= p.nombre %>">
-      <h3><%= p.nombre %></h3>
-      <p><%= p.descripcion %></p>
-      <strong>$<%= p.precio %></strong>
-    </div>
-  <% }) %>
-
-  <h2>Saladas</h2>
-  <% productos.filter(p => p.categoria === "saladas").forEach(p => { %>
-    <div class="card">
-      <img src="<%= p.imagen %>" alt="<%= p.nombre %>">
-      <h3><%= p.nombre %></h3>
-      <p><%= p.descripcion %></p>
-      <strong>$<%= p.precio %></strong>
-    </div>
-  <% }) %>
-</div>
-
 
     <%- include('includes/footer') %>
+
+    <!-- Script para filtrar categorías -->
+    <script>
+      const buttons = document.querySelectorAll(".filter");
+      const cards = document.querySelectorAll(".card");
+
+      function showCategory(cat) {
+        cards.forEach(card => {
+          card.style.display = (card.dataset.cat === cat) ? "block" : "none";
+        });
+      }
+
+      // Mostrar solo la categoría activa al inicio
+      showCategory("arma");
+
+      buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          buttons.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          showCategory(btn.dataset.cat);
+        });
+      });
+    </script>
   </body>
 </html>
